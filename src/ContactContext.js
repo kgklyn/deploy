@@ -8,6 +8,8 @@ const INIT_STATE = {
   contactToEdit: null,
 };
 
+const API = "https://deploy1990.herokuapp.com/api/";
+
 const reducer = (state = INIT_STATE, action) => {
   switch (action.type) {
     case "GET_CONTACTS":
@@ -26,12 +28,12 @@ const ContactContextProvider = ({ children }) => {
   // console.log(state.contactToEdit);
 
   const addContact = async (newContact) => {
-    await axios.post("http://localhost:8000/contacts", newContact);
+    await axios.post(`${API}, newContact`);
     getContacts();
   };
 
   const getContacts = async () => {
-    let { data } = await axios("http://localhost:8000/contacts");
+    let { data } = await axios("${}");
     dispatch({
       type: "GET_CONTACTS",
       payload: data,
@@ -39,12 +41,12 @@ const ContactContextProvider = ({ children }) => {
   };
 
   const deleteContact = async (id) => {
-    await axios.delete(`http://localhost:8000/contacts/${id}`);
+    await axios.delete(`${API}/${id}`);
     getContacts();
   };
 
   const editContact = async (id) => {
-    let { data } = await axios(`http://localhost:8000/contacts/${id}`);
+    let { data } = await axios(`${API}/${id}`);
 
     let action = {
       type: "EDIT_CONTACT",
@@ -54,10 +56,7 @@ const ContactContextProvider = ({ children }) => {
   };
 
   const saveContact = async (newContact) => {
-    await axios.patch(
-      `http://localhost:8000/contacts/${newContact.id}`,
-      newContact
-    );
+    await axios.patch(`${API}/${newContact.id}`, newContact);
     getContacts();
   };
 
