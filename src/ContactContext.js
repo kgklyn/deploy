@@ -8,7 +8,7 @@ const INIT_STATE = {
   contactToEdit: null,
 };
 
-const API = "https://deploy1990.herokuapp.com/api/";
+const API = "https://deploy1990.herokuapp.com/contacts/";
 
 const reducer = (state = INIT_STATE, action) => {
   switch (action.type) {
